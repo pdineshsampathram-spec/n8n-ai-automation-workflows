@@ -36,7 +36,7 @@ Automatically collects AI and technology news, summarizes articles using an LLM,
 **Tech Stack:**  
 n8n · Google Gemini · Gmail · RSS
 
-Path: `ai-news-email-summarizer/`
+Path: `daily-ai-news-email.json.json`
 
 ---
 
