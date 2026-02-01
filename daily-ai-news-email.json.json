@@ -1,0 +1,245 @@
+{
+  "name": "Ai news summary",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        -16
+      ],
+      "id": "6901ebde-70ee-48d6-bced-9590451ca28b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://aiacceleratorinstitute.com/rss/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -112
+      ],
+      "id": "7d8a9cce-632d-4811-873d-8403211996d2",
+      "name": "Ai new feed"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "link"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -16
+      ],
+      "id": "8a0138dd-781c-4ea9-ba6b-b136e7c3d3f8",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.link }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an AI & Technology News Summarizer used in an automation workflow.\nAnalyze the input list of AI and technology news articles and generate a clean, simple email summary.\n\nRules (important for automation):\nUse plain, simple English\nDo not add opinions, emojis, hashtags, or greetings outside the format\nKeep summaries 2–3 short sentences\nInclude only AI, automation, software, or emerging tech news\nOutput must be consistent and predictable\nFor EACH article, output:\nHeadline in ALL CAPS\n2–3 sentence summary explaining what happened and why it matters\nThe article URL\nOutput Format (use exactly):\nSubject: Today’s AI & Tech News\nHi there,\nHere’s your AI & technology news summary:\nHEADLINE IN ALL CAPS\nShort summary of the news and its importance.\nRead more: [give article link here]\nBest regards,\nAI News Bot\n\nDo not include anything outside this format."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        672,
+        -16
+      ],
+      "id": "6a8de33c-62d0-4bc4-8ae4-26aa0210d9fa",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        744,
+        208
+      ],
+      "id": "8a53bcb1-32de-46d2-ae5d-eeddbd670cb4",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "4AQKS6oeEQo2FqiR",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "pdineshsampathram@gmail.com",
+        "subject": "ai news for you",
+        "emailType": "text",
+        "message": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        -16
+      ],
+      "id": "58be2c8d-9a0a-456b-adfd-d4eb30acae45",
+      "name": "Send a message",
+      "webhookId": "fd0d8c9c-5a05-40bc-84b4-b7e5ada7cedc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uFUtZQTsunvnptef",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        80
+      ],
+      "id": "19f6e60b-0107-4245-b7db-abade7e09759",
+      "name": "Ai new feed1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        224,
+        -16
+      ],
+      "id": "359a493e-9800-41a8-96cc-2b9c7313fb3e",
+      "name": "Merge"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Ai new feed",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ai new feed1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ai new feed": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ai new feed1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "pinData": {},
+  "triggerCount": 1,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
