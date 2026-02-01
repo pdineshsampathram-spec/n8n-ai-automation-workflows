@@ -1,5 +1,5 @@
 {
-  "name": "My workflow",
+  "name": "AI LinkedIn Content Automation",
   "nodes": [
     {
       "parameters": {
@@ -12,49 +12,34 @@
         },
         "documentId": {
           "__rl": true,
-          "value": "1biKu1Z5I-kuVUUZvvIMh_NPKUyWEfa2OqhHnyVOWG4Y",
-          "mode": "list",
-          "cachedResultName": "test",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1biKu1Z5I-kuVUUZvvIMh_NPKUyWEfa2OqhHnyVOWG4Y/edit?usp=drivesdk"
+          "value": "",
+          "mode": "list"
         },
         "sheetName": {
           "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1biKu1Z5I-kuVUUZvvIMh_NPKUyWEfa2OqhHnyVOWG4Y/edit#gid=0"
+          "value": "",
+          "mode": "list"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
-      "position": [
-        0,
-        0
-      ],
+      "position": [0, 0],
       "id": "ffe3fbe5-3590-4206-95ae-bb6455bfe671",
       "name": "Google Sheets Trigger",
-      "credentials": {
-        "googleSheetsTriggerOAuth2Api": {
-          "id": "bUnIvsEJE612VHQP",
-          "name": "Google Sheets Trigger account"
-        }
-      }
+      "credentials": {}
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "= System: \"You are a social media strategist with expertise in content adaptation\"\n\n  User: \"Analyze this article and create a summary that:\n  1. Captures the 3 most important insights\n  2. Includes any actionable advice or tips\n  3. Maintains the original tone and perspective\n  4. Highlights implications for the target audience\n  5. Stays under 200 words for social media adaptation\n  \n  Article:{{ $json.article }}",
+        "text": "You are a social media strategist with expertise in content adaptation.\n\nAnalyze the following article and create a concise summary that:\n1. Captures the 3 most important insights\n2. Includes actionable advice or tips\n3. Maintains the original tone\n4. Highlights implications for the target audience\n5. Stays under 200 words\n\nArticle:\n{{ $json.article }}",
         "batching": {}
       },
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
-      "position": [
-        208,
-        0
-      ],
+      "position": [208, 0],
       "id": "123c6992-3bfb-452b-960d-cc16823089dd",
-      "name": "Basic LLM Chain"
+      "name": "Article Summary Generator"
     },
     {
       "parameters": {
@@ -62,33 +47,22 @@
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "position": [
-        208,
-        176
-      ],
+      "position": [208, 176],
       "id": "9ec5c73e-84b7-44fc-b214-ba7cb7fb9fd1",
       "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "L74HUdMv7gZuwjSu",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
+      "credentials": {}
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Assume the role of an industry expert and draft a LinkedIn post discussing key points from a news article relevant to artificial intelligence. The post should provide insightful analysis, connect with current industry trends, and encourage professional engagement or discussion. Highlight any notable implications for the industry. Since LinkedIn supports detailed posts, ensure it is informative and structured. Include a professional call to action. Here's a summary of the article:\n\n{{ $json.text }}",
+        "text": "Assume the role of an industry expert and draft a professional LinkedIn post based on the following summary.\n\nRequirements:\n- Insightful and structured\n- Connected to current industry trends\n- Highlights implications for professionals\n- Encourages discussion\n- Includes a professional call to action\n\nSummary:\n{{ $json.text }}",
         "batching": {}
       },
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
-      "position": [
-        560,
-        0
-      ],
+      "position": [560, 0],
       "id": "a445d283-5f53-4b22-b790-bc8331fc62ca",
-      "name": "Basic LLM Chain1"
+      "name": "LinkedIn Post Generator"
     },
     {
       "parameters": {
@@ -96,93 +70,57 @@
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "position": [
-        592,
-        176
-      ],
+      "position": [592, 176],
       "id": "8dfbf2aa-f369-4b8e-a84d-6a83e9e869e6",
-      "name": "Google Gemini Chat Model1",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "L74HUdMv7gZuwjSu",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
+      "name": "Google Gemini Chat Model (Post)",
+      "credentials": {}
     },
     {
       "parameters": {
-        "person": "Dinesh Polimera\n",
+        "person": "",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.linkedIn",
       "typeVersion": 1,
-      "position": [
-        912,
-        0
-      ],
+      "position": [912, 0],
       "id": "eaa0a039-7e03-43c2-845c-42fc2626d50a",
-      "name": "Create a post",
-      "credentials": {
-        "linkedInOAuth2Api": {
-          "id": "bo23DOUQi6HgKUoT",
-          "name": "LinkedIn account"
-        }
-      }
+      "name": "Publish LinkedIn Post",
+      "credentials": {}
     }
   ],
   "connections": {
     "Google Sheets Trigger": {
       "main": [
         [
-          {
-            "node": "Basic LLM Chain",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Article Summary Generator", "type": "main", "index": 0 }
         ]
       ]
     },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
-          {
-            "node": "Basic LLM Chain",
-            "type": "ai_languageModel",
-            "index": 0
-          }
+          { "node": "Article Summary Generator", "type": "ai_languageModel", "index": 0 }
         ]
       ]
     },
-    "Basic LLM Chain": {
+    "Article Summary Generator": {
       "main": [
         [
-          {
-            "node": "Basic LLM Chain1",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "LinkedIn Post Generator", "type": "main", "index": 0 }
         ]
       ]
     },
-    "Google Gemini Chat Model1": {
+    "Google Gemini Chat Model (Post)": {
       "ai_languageModel": [
         [
-          {
-            "node": "Basic LLM Chain1",
-            "type": "ai_languageModel",
-            "index": 0
-          }
+          { "node": "LinkedIn Post Generator", "type": "ai_languageModel", "index": 0 }
         ]
       ]
     },
-    "Basic LLM Chain1": {
+    "LinkedIn Post Generator": {
       "main": [
         [
-          {
-            "node": "Create a post",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Publish LinkedIn Post", "type": "main", "index": 0 }
         ]
       ]
     }
@@ -190,10 +128,9 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {},
   "pinData": {},
-  "triggerCount": 0,
   "meta": {
-    "templateCredsSetupCompleted": true
+    "templateCredsSetupCompleted": false
   }
 }
