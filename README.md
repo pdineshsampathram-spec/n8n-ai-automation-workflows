@@ -56,23 +56,6 @@ n8n · Google Sheets · Google Gemini · LinkedIn API
 
 ---
 
-### 4️⃣ AI Resume Checker – Telegram Bot
-**Description:**  
-A Telegram-based AI resume evaluation system that analyzes resumes and sends feedback via email.
-
-**Features:**
-- Telegram bot interaction
-- Resume extraction from Google Docs
-- AI-powered resume analysis
-- Email delivery of evaluation reports
-
-**Tech Stack:**  
-Make.com · AI Agents · Telegram Bot API · Gmail · Google Docs
-
-📂 Separate Repository
-
----
-
 ## 🔐 Security
 All workflows are shared **without credentials, tokens, or personal data**.  
 Users must connect their own accounts after importing.
