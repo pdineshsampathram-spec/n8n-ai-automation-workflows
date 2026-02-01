@@ -1,44 +1,97 @@
 # 🤖 n8n AI Automation Workflows
 
-This repository contains AI-powered automation workflows built using **n8n**, **LLMs (Google Gemini / OpenAI)**, and **RSS feeds**.
-
-## 📂 Workflows Included
-
-### 1. LinkedIn Content Automation
-- Reads articles from Google Sheets
-- Summarizes content using AI
-- Generates professional LinkedIn posts
-- Automatically publishes to LinkedIn
-
-📄 File: `linkedin-content-automation.json`
+A collection of **AI-powered automation workflows** built using **n8n**, **LLMs**, and third-party integrations.  
+These projects demonstrate real-world use cases of AI agents, content automation, and information summarization.
 
 ---
 
-### 2. Daily AI News Email
-- Fetches AI & tech news from RSS feeds
-- Uses AI to summarize articles
-- Sends a daily email summary via Gmail
+## 🚀 Projects Included
 
-📄 File: `daily-ai-news-email.json`
+### 1️⃣ AI News Agent (World + Tech)
+**Description:**  
+An AI agent that fetches the latest world and technology news from RSS feeds and generates a concise daily summary.
+
+**Features:**
+- Scheduled daily execution
+- Multiple RSS feed integration
+- AI-powered summarization
+- Optional email delivery
+
+**Tech Stack:**  
+n8n · LangChain · OpenAI / LLMs · RSS
+
+📂 Folder: `ai-news-agent/`
 
 ---
 
-### 3. AI Agent News Summarizer
-- Uses an AI Agent with tools
-- Fetches world and tech news
-- Produces daily summaries
-- Can send results via email
+### 2️⃣ AI News Email Summarizer
+**Description:**  
+Automatically collects AI and technology news, summarizes articles using an LLM, and sends a clean daily email report.
 
-📄 File: `ai-agent-news-summarizer.json`
+**Features:**
+- RSS aggregation from multiple sources
+- Structured AI-generated summaries
+- Email automation
 
-## 🛠 Tools & Tech
-- n8n
-- Google Gemini / OpenAI
-- RSS Feeds
-- Gmail API
-- LinkedIn API
+**Tech Stack:**  
+n8n · Google Gemini · Gmail · RSS
 
-## 🚀 How to Use
-1. Import the JSON file into n8n
-2. Configure credentials
+📂 Folder: `ai-news-email-summarizer/`
+
+---
+
+### 3️⃣ LinkedIn AI Content Automation
+**Description:**  
+An end-to-end automation that converts articles stored in Google Sheets into professional LinkedIn posts using AI.
+
+**Features:**
+- Google Sheets trigger
+- AI-based article summarization
+- LinkedIn post generation and publishing
+
+**Tech Stack:**  
+n8n · Google Sheets · Google Gemini · LinkedIn API
+
+📂 Folder: `linkedin-content-automation/`
+
+---
+
+### 4️⃣ AI Resume Checker – Telegram Bot
+**Description:**  
+A Telegram-based AI resume evaluation system that analyzes resumes and sends feedback via email.
+
+**Features:**
+- Telegram bot interaction
+- Resume extraction from Google Docs
+- AI-powered resume analysis
+- Email delivery of evaluation reports
+
+**Tech Stack:**  
+Make.com · AI Agents · Telegram Bot API · Gmail · Google Docs
+
+📂 Separate Repository
+
+---
+
+## 🔐 Security
+All workflows are shared **without credentials, tokens, or personal data**.  
+Users must connect their own accounts after importing.
+
+---
+
+## 🎯 Why This Repository Matters
+- Demonstrates **AI + automation skills**
+- Shows real-world problem solving
+- Uses production-style workflows, not tutorials
+- Suitable for internships, placements, and junior roles
+
+---
+
+## 📌 How to Use
+1. Import the JSON workflow into n8n
+2. Connect required credentials
 3. Activate the workflow
+
+---
+
+⭐ If you find these workflows useful, feel free to star the repository.
