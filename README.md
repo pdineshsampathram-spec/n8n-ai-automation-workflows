@@ -52,7 +52,7 @@ An end-to-end automation that converts articles stored in Google Sheets into pro
 **Tech Stack:**  
 n8n · Google Sheets · Google Gemini · LinkedIn API
 
-Path: `linkedin-content-automation/`
+Path: `linkedin-content-automation.json`
 
 ---
 
