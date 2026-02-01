@@ -20,7 +20,7 @@ An AI agent that fetches the latest world and technology news from RSS feeds and
 **Tech Stack:**  
 n8n · LangChain · OpenAI / LLMs · RSS
 
-📂 Folder: `ai-news-agent/`
+Path: `ai-agent-news-summarizer.json`
 
 ---
 
@@ -36,7 +36,7 @@ Automatically collects AI and technology news, summarizes articles using an LLM,
 **Tech Stack:**  
 n8n · Google Gemini · Gmail · RSS
 
-📂 Folder: `ai-news-email-summarizer/`
+Path: `ai-news-email-summarizer/`
 
 ---
 
@@ -52,7 +52,7 @@ An end-to-end automation that converts articles stored in Google Sheets into pro
 **Tech Stack:**  
 n8n · Google Sheets · Google Gemini · LinkedIn API
 
-📂 Folder: `linkedin-content-automation/`
+Path: `linkedin-content-automation/`
 
 ---
 
