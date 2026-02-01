@@ -62,14 +62,6 @@ Users must connect their own accounts after importing.
 
 ---
 
-## 🎯 Why This Repository Matters
-- Demonstrates **AI + automation skills**
-- Shows real-world problem solving
-- Uses production-style workflows, not tutorials
-- Suitable for internships, placements, and junior roles
-
----
-
 ## 📌 How to Use
 1. Import the JSON workflow into n8n
 2. Connect required credentials
